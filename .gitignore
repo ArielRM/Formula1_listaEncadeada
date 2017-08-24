@@ -1,5 +1,2 @@
 *.[oa]
-*.cbp
-*.depend
-*.layout
-bin/*
+*.bin

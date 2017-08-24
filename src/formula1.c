@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "formula1.h"
+#include "../include/formula1.h"
 
 #define TAM_BUFFER 1000
 

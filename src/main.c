@@ -2,9 +2,9 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "formula1.h"
-#include "lista_enc.h"
-#include "no.h"
+#include "../include/formula1.h"
+#include "../include/lista_enc.h"
+#include "../include/no.h"
 
 #ifndef TAM_BUFFER
 #define TAM_BUFFER 1000
@@ -14,7 +14,7 @@ int main()
 {
     char buffer[TAM_BUFFER];
     /// Abrindo o arquivo
-    FILE* entrada = fopen("formula1.csv","r");
+    FILE* entrada = fopen("doc/formula1.csv","r");
     if(entrada == NULL) {
         perror("main: erro ao abrir formula1.csv");
         exit(EXIT_FAILURE);

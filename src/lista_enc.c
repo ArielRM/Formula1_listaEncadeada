@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "lista_enc.h"
-#include "no.h"
+#include "../include/lista_enc.h"
+#include "../include/no.h"
 
 //#define DEBUG
 
