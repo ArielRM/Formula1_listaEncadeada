@@ -1,0 +1,4 @@
+*.[oa]
+*.cbp
+*.depend
+bin/*
