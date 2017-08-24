@@ -1,7 +1,7 @@
 #ifndef LISTA_ENC_H_INCLUDED
 #define LISTA_ENC_H_INCLUDED
 
-#include "no.h"
+#include "../include/no.h"
 
 typedef struct listas_enc lista_enc_t;
 
