@@ -1,10 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 
-#include "../include/formula1.h"
-#include "../include/lista_enc.h"
-#include "../include/no.h"
+#include "formula1.h"
+#include "lista_enc.h"
+#include "no.h"
 
 #ifndef TAM_BUFFER
 #define TAM_BUFFER 1000
@@ -14,7 +13,7 @@ int main()
 {
     char buffer[TAM_BUFFER];
     /// Abrindo o arquivo
-    FILE* entrada = fopen("doc/formula1.csv","r");
+    FILE* entrada = fopen("formula1.csv","r");
     if(entrada == NULL) {
         perror("main: erro ao abrir formula1.csv");
         exit(EXIT_FAILURE);
@@ -34,7 +33,8 @@ int main()
 
 
     /// Liberando o espaço alocado
-    for(int len = tamanho(lista); len > 0; len = tamanho(lista)) {
+    int len;
+    for(len = tamanho(lista); len > 0; len = tamanho(lista)) {
         no_t* n = remove_cabeca(lista);
         temporada_t* t = obtem_dado(n);
         free(obtemPais(t));
@@ -43,10 +43,12 @@ int main()
         free(obtemMotor(t));
         free(obtemPneus(t));
         free(obtemEncerradas(t));
+        free(obtemCorrida(t));
         free(n);
         free(t);
     }
     free(lista);
     fclose(entrada);
+
     return 0;
 }

@@ -9,4 +9,8 @@ char * obtemEquipe(temporada_t *temp);
 char * obtemMotor(temporada_t *temp);
 char * obtemPneus(temporada_t *temp);
 char * obtemEncerradas(temporada_t *temp);
+char * obtemCorrida(temporada_t *temp);
+
+void printTemporada(temporada_t *temp);
+
 #endif // FORMULA1_H_INCLUDED

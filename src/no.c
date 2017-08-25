@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "../include/no.h"
+#include "no.h"
 
 struct nos{
     void* dados;

@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "../include/formula1.h"
+#include "formula1.h"
 
 #define TAM_BUFFER 1000
 
@@ -15,9 +15,12 @@ struct temporada {
 	char* motor; //?
 	char* pneus;
 	int poles;
+	short vitorias;
+	short podiums;
 	int voltas_mais_rapidas;
-	int pontos;
+	float pontos;
 	char* encerradas;
+	char* corrida;
 	float PM;
 };
 
@@ -34,11 +37,12 @@ temporada_t * novaTemporada(char* record) {
 	char motor[TAM_BUFFER];
 	char pneus[TAM_BUFFER];
     char encerradas[TAM_BUFFER];
+    char corrida[TAM_BUFFER];
 
-    int hold = sscanf(record,"%hd;%1000[^;];%1000[^;];%hd;%d;%1000[^;];%1000[^;];%1000[^;];%d;%d;%d;%1000[^;];%f",
-           &temp->ano,pais,piloto,&temp->idade,&temp->numero,equipe,motor,pneus,&temp->poles,&temp->voltas_mais_rapidas,
-           &temp->pontos,encerradas,&temp->PM);
-    if(hold != 13){
+    int hold = sscanf(record,"%hd;%1000[^;];%1000[^;];%hd;%d;%1000[^;];%1000[^;];%1000[^;];%d;%hd;%hd;%d;%f;%1000[^;];%1000[^;];%f",
+           &temp->ano,pais,piloto,&temp->idade,&temp->numero,equipe,motor,pneus,&temp->poles,&temp->vitorias,&temp->podiums,
+           &temp->voltas_mais_rapidas,&temp->pontos,encerradas,corrida,&temp->PM);
+    if(hold != 16){
         fprintf(stderr,"Arquivo inválido em:\n>>%s<<",record);
         exit(EXIT_FAILURE);
     }
@@ -71,6 +75,7 @@ temporada_t * novaTemporada(char* record) {
     }
     strncpy(temp->motor,motor,strlen(motor)+1);
 
+
     temp->pneus = (char*) malloc(strlen(pneus) + 1);
     if(temp->pneus == NULL) {
         perror("novaTemp: Erro ao alocar memória para temp->pneus");
@@ -84,6 +89,13 @@ temporada_t * novaTemporada(char* record) {
         exit(EXIT_FAILURE);
     }
     strncpy(temp->encerradas,encerradas,strlen(encerradas)+1);
+
+    temp->corrida= (char*) malloc(strlen(corrida) + 1);
+    if(temp->corrida == NULL) {
+        perror("novaTemp: Erro ao alocar memória para temp->corrida");
+        exit(EXIT_FAILURE);
+    }
+    strncpy(temp->corrida,corrida,strlen(corrida)+1);
 
     return temp;
 }
@@ -105,4 +117,26 @@ char * obtemPneus(temporada_t *temp) {
 }
 char * obtemEncerradas(temporada_t *temp) {
     return temp->encerradas;
+}
+char * obtemCorrida(temporada_t *temp) {
+    return temp->corrida;
+}
+
+
+void printTemporada(temporada_t *temp) {
+    printf("Ano: %hd\n\
+Pais: %s\n\
+Piloto: %s\n\
+Idade: %hd\n\
+Num. Car.: %d\n\
+Equipe: %s\n\
+Motor: %s\n\
+Pneus: %s\n\
+Poles: %d\n\
+Volt. Mais Rapidas: %d\n\
+Pontos: %.1f\n\
+Encerradas: %s\n\
+Point Margin: %.2f\n",
+           temp->ano,temp->pais,temp->piloto,temp->idade,temp->numero,temp->equipe,temp->motor,temp->pneus,temp->poles,
+           temp->voltas_mais_rapidas,temp->pontos,temp->encerradas,temp->PM);
 }

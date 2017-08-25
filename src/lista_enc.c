@@ -1,10 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "../include/lista_enc.h"
-#include "../include/no.h"
+#include "lista_enc.h"
+#include "no.h"
 
-//#define DEBUG
+#define DEBUG
 
 struct listas_enc {
     no_t *cabeca;
@@ -87,7 +87,8 @@ no_t * remove_elem(lista_enc_t *lista, int index) {
 		return remove_cabeca(lista);
 	no_t *elem_ant = lista->cabeca;
 	no_t *elemento = obtem_proximo(elem_ant);
-	for(int i = 1; i < index; i++) {
+	int i;
+	for(i = 1; i < index; i++) {
 		elem_ant = elemento;
 		elemento = obtem_proximo(elemento);
 	}
